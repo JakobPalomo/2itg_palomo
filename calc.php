@@ -3,60 +3,66 @@
         <title>Tax simulator</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
 
     </head>
 
     <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Tax Collector Simulator</a>
+      </div>
+    </nav>
 
-    </br><center><h1>Tax Collector Simulator</h1></center> </br></br>
-        <!-- First Div-->
-            <div class="row">
-                <div class="col-sm-4"></div>
-                    <div class="col-sm-4">
-                        <form action="calc.php">
-                        <div class="input-group flex-nowrap">
-                        <span class="input-group-text">Salary</span>
-                        <input type="text" class="form-control" placeholder="Input your monthly salary here" name="salary">
-                        
-                        </div>
-                    </div>
-                <div class="col-sm-4"></div>
+    <div class="container my-5">
+      <h1 class="text-center">Tax Collector Simulator</h1>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-4">
+          <form action="calc.php" onsubmit="return validateRadioButtons()">
+            <div class="form-group">
+              <label for="salary">Salary</label>
+              <input type="text" class="form-control" id="salary" placeholder="Input your monthly salary here" name="salary" required>
             </div>
 
-        <!-- Radio Buttons-->
-            <center></br>
-            Type: 
-            </br>
-            <input type="radio"name="type" value="Bi"> Bi-Monthly
-            <input type="radio"name="type" value="Mon"> Monthly </br>
-            </center>
+            <div class="form-group">
+              <label for="type">Type:</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="type" id="bi" value="bi"/>
+                <label class="form-check-label" for="bi">Bi-Monthly</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="type" id="mon" value="mon"/>
+                <label class="form-check-label" for="mon">Monthly</label>
+              </div>
+            </div>
 
-        <!-- Compute button-->
-            <center>
-                </br><input type="submit" value="Calculate"></br>
-            </form>
-            </center>
-        <!--Results tab-->
-            </br>
-            <!-- <center>
-                Annual Salary : PHP XXXXX.XX </br>
-                Est. Annual Tax : PHP XXXXX.XX </br>
-                Est. Monthly Tax : PHP XXXXX.XX </br>
-            </center> -->
+            <div class="form-group text-center">
+              <input type="submit" value="Calculate" class="btn btn-primary">
+            </div>
+          </form>
+        </div>
+      </div>
          <?php
-            $salary = $_GET["salary"];
-            // $type =  $_POST["type"];
+
+            $salary;
+            $type=2;
             $taxYrValue;
             $excess;
             $annualTax;
             $monthTax;
 
-                // if ($type=="Bi"){
-                //     $salary=$salary*.2;
-                // }
+            if (isset($_GET["salary"])){
+                $salary=$_GET["salary"];
+                $type=$_GET['type'];
+
+                if ($type=="bi"){
+                    $salary=$salary*2;
+                } 
 
                 $taxYrValue = $salary*12;
                 print("<center>Annual Salary :$taxYrValue. </br></center>");
+
 
                 if ($taxYrValue>250000&&$taxYrValue<400000){
                     $excess=($taxYrValue-250000)*.2;
@@ -73,11 +79,13 @@
                 }
 
                 $annualTax = $excess;
-                print("</br><center>Est. Annual Tax : $annualTax. </br></center>");
+                print("</br><center>Est. Annual Tax : PHP $annualTax. </br></center>");
 
                 $monthTax = $annualTax/12;
                 $monthTax=round($monthTax,2);
-                print("</br><center>Est. Monthly Tax : $monthTax. </br></center>");
+                print("</br><center>Est. Monthly Tax : PHP $monthTax. </br></center>");
+            }
+            
 
         ?> 
 
