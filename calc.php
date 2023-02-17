@@ -3,46 +3,48 @@
         <title>Tax simulator</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="style.css">
-        <script src="script.js"></script>
+        <link href="./css/style.css" rel="stylesheet">
 
     </head>
 
     <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    
+    <nav class="navi">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Tax Collector Simulator</a>
+        <a class="navbar-brand" href="#"><h4><img src="logo.png" width=80px height=90px magin-left=70px> Tax-Collector-Simulator</h4></a>
       </div>
     </nav>
-
-    <div class="container my-5">
-      <h1 class="text-center">Tax Collector Simulator</h1>
-
+    </br></br></br></br></br></br></br>
+    <div class="formStyle">
+      <h1 class="text-center">Tax-Collector-Simulator</h1>
       <div class="row justify-content-center">
-        <div class="col-sm-4">
+        <div class="col-lg-10">
           <form action="calc.php" onsubmit="return validateRadioButtons()">
-            <div class="form-group">
+            <div class="inputtt">
               <label for="salary">Salary</label>
-              <input type="text" class="form-control" id="salary" placeholder="Input your monthly salary here" name="salary" required>
+              <input type="number" class="form-control" id="salary" placeholder="Input your monthly salary here" name="salary" required>
             </div>
 
             <div class="form-group">
               <label for="type">Type:</label>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="type" id="bi" value="bi"/>
+                <input type="radio" name="type" id="bi" value="bi" required/>
                 <label class="form-check-label" for="bi">Bi-Monthly</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="type" id="mon" value="mon"/>
+                <input type="radio" name="type" id="mon" value="mon" required/>
                 <label class="form-check-label" for="mon">Monthly</label>
               </div>
             </div>
 
             <div class="form-group text-center">
+</br>
               <input type="submit" value="Calculate" class="btn btn-primary">
             </div>
           </form>
         </div>
       </div>
+  
          <?php
 
             $salary;
@@ -61,7 +63,7 @@
                 } 
 
                 $taxYrValue = $salary*12;
-                print("<center>Annual Salary :$taxYrValue. </br></center>");
+                print("<center><h6>Annual Salary : PHP " .number_format($taxYrValue,2). " </h6></center>");
 
 
                 if ($taxYrValue>250000&&$taxYrValue<400000){
@@ -79,15 +81,18 @@
                 }
 
                 $annualTax = $excess;
-                print("</br><center>Est. Annual Tax : PHP $annualTax. </br></center>");
+                print("</br><center><h6>Est. Annual Tax : PHP " .number_format($annualTax,2). "</h6></center>");
 
                 $monthTax = $annualTax/12;
                 $monthTax=round($monthTax,2);
-                print("</br><center>Est. Monthly Tax : PHP $monthTax. </br></center>");
+                print("</br><center><h6>Est. Monthly Tax : PHP " .number_format($monthTax,2). " </h6></center>");
             }
             
 
         ?> 
-
+        </div>
+        </br></br></br></br>
+        <center><h6>Disclaimer: This application is just a simulator, values may not be accurate to actual tax implementations. This may just give you an idea on how much your tax may be for the year. </h5></center>
+        </br></br></br></br></br>
     </body>
 </html>
